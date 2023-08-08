@@ -19,6 +19,7 @@
 		63D8FB1E2A81B0AA00BCD60C /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63D8FB1D2A81B0AA00BCD60C /* keys.plist */; };
 		63D8FB212A81B33C00BCD60C /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D8FB202A81B33C00BCD60C /* DetailView.swift */; };
 		63D8FB232A81B78100BCD60C /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D8FB222A81B78100BCD60C /* WebView.swift */; };
+		63D8FB262A828D6700BCD60C /* KeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D8FB252A828D6700BCD60C /* KeyManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		63D8FB1D2A81B0AA00BCD60C /* keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
 		63D8FB202A81B33C00BCD60C /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		63D8FB222A81B78100BCD60C /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		63D8FB252A828D6700BCD60C /* KeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 		63C875A72A812E110089A5A2 /* I Am Rich */ = {
 			isa = PBXGroup;
 			children = (
+				63D8FB242A828D4300BCD60C /* Utils */,
 				63D8FB1F2A81B32C00BCD60C /* Views */,
 				63D8FB182A818BE600BCD60C /* Models */,
 				63C875A82A812E110089A5A2 /* I_Am_RichApp.swift */,
@@ -105,6 +108,14 @@
 				63D8FB222A81B78100BCD60C /* WebView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		63D8FB242A828D4300BCD60C /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				63D8FB252A828D6700BCD60C /* KeyManager.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,6 +190,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63D8FB1A2A818C0E00BCD60C /* NetworkManager.swift in Sources */,
+				63D8FB262A828D6700BCD60C /* KeyManager.swift in Sources */,
 				63D8FB212A81B33C00BCD60C /* DetailView.swift in Sources */,
 				63C875AB2A812E110089A5A2 /* ContentView.swift in Sources */,
 				63D8FB152A81876500BCD60C /* RandomDice.swift in Sources */,

@@ -9,8 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        NewsView()
+        Text("Value for Key 'Name': \(getValueForKey(key: "apikey") ?? "N/A")")
     }
+
 }
 
 
