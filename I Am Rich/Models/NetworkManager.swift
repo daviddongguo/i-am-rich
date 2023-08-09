@@ -8,23 +8,36 @@
 import Foundation
 
 class NetworkManager : ObservableObject{
-    
-    @Published var posts = [Post]()
+
     @Published var ingredients = [Ingredient]()
-    
-    func fetchIngredientData() {
-        let query = "3lb carrots and a chicken sandwich".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+    let apiKey: String = getValueForKey(key: "apikey") ?? ""
+
+    func fetchIngredientData(_ foodTextQuery: String) {
+        let query = foodTextQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         let url = URL(string: "https://api.calorieninjas.com/v1/nutrition?query="+query!)!
         var request = URLRequest(url: url)
-        request.setValue(getValueForKey(key: "apikey"), forHTTPHeaderField: "X-Api-Key")
+        request.setValue(apiKey, forHTTPHeaderField: "X-Api-Key")
         let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
-            guard let data = data else { return }
-            print(String(data: data, encoding: .utf8)!)
-        }
+            if error == nil {
+                let decoder = JSONDecoder()
+                if let safeData = data {
+                    do {
+                        let results = try decoder.decode(CalorieResults.self, from: safeData)
+                        DispatchQueue.main.async {
+                            print(results.items)
+                            self.ingredients = results.items
+                        }
+                    } catch {
+                        print(error)
+                    } //: catch parser error
+                } //: safeData
+
+            } //: error
+        } //: task
         task.resume()
-        
-    }
-    
+    } //: func
+
+    @Published var posts = [Post]()
     func fetchData() {
         if let url = URL(string: "https://hn.algolia.com/api/v1/search?tags=front_page") {
             let session = URLSession(configuration: .default)
@@ -39,13 +52,11 @@ class NetworkManager : ObservableObject{
                             }
                         } catch {
                             print(error)
-                        }
-                    }
-                    
-                }
-                
-            }
+                        } //: catch parser error
+                    } //: safeData
+                } //: error
+            } //: task
             task.resume()
-        }
-    }
+        } //: url
+    } //: func
 }

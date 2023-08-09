@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    
     var body: some View {
-//        Text("Value for Key 'Name': \(getValueForKey(key: "apikey") ?? "N/A")")
         IngredientView()
     }
-
+    
 }
 
 
