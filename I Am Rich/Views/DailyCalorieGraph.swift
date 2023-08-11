@@ -11,7 +11,7 @@ import SwiftUI
 struct DailyCalorieGraph: UIViewRepresentable  {
     typealias UIViewType = BarChartView
     
-    let entries: [BarChartDataEntry]
+    var entries: [BarChartDataEntry]
     func makeUIView(context: Context) -> BarChartView {
      return BarChartView()
     }

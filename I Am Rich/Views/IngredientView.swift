@@ -12,7 +12,20 @@ import SwiftUI
 
 struct IngredientView: View {
     
-    @State private var totalCalries: Int = 0
+    let defaults = UserDefaults.standard
+    @State private var dateTimeCalories : [DateTimeCalorie] = [
+        DateTimeCalorie(dateTime: DateTimeCalorie.parseDate("2023-08-3 07:30"), calorie: 1200.0),
+        DateTimeCalorie(dateTime: DateTimeCalorie.parseDate("2023-08-4 07:30"), calorie: 1200.0),
+        DateTimeCalorie(dateTime: DateTimeCalorie.parseDate("2023-08-5 07:30"), calorie: 1200.0),
+        DateTimeCalorie(dateTime: DateTimeCalorie.parseDate("2023-08-6 07:30"), calorie: 1200.0),
+        DateTimeCalorie(dateTime: DateTimeCalorie.parseDate("2023-08-7 07:30"), calorie: 1200.0),
+    ]
+    
+    @State private var selectedDate = Date()
+    @State private var isDatePickerVisible = false
+    
+    
+    @State private var totalCalries: Double = 50.0
     @State private var foodInputString: String = ""
     @State private var quantities = [Int]()
     @State private var ingredientWithQuantityList = [IngredientWithQuntityViewModel]()
@@ -22,7 +35,29 @@ struct IngredientView: View {
     var body: some View {
         
         VStack {
+            
+            Button(action: {
+                isDatePickerVisible.toggle()
+            }) {
+                Image(systemName: "calendar")
+                    .font(.largeTitle)
+                    .foregroundColor(.blue)
+            }
+            .sheet(isPresented: $isDatePickerVisible, content: {
+                DatePicker("Select a date", selection: $selectedDate, displayedComponents: [.date, .hourAndMinute])
+                    .datePickerStyle(GraphicalDatePickerStyle())
+                    .navigationBarItems(trailing: Button("Done") {
+                        isDatePickerVisible = false
+                    })
+                
+            }) //: end of Button
+            Text("\(selectedDate, formatter: dateFormatter)")
+                .padding()
+
             Text(totalCalries.formatted()).font(.system(size: 50)).fontWeight(.heavy).foregroundColor(.white).background(.red).padding(.horizontal)
+            
+            Slider(value: $totalCalries, in: 0...1200, step: 10)
+                .padding()
             TextField("Enter a food, dirnk, or ingredient", text: $foodInputString)
                 .padding()
                 .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -38,7 +73,14 @@ struct IngredientView: View {
                 }
                 self.networkManager.fetchIngredientData(foodInputString)
             }
-            .padding().frame(width: 300, height: 200)
+            .padding()
+            
+            Button("Save") {
+                let currentDateTimeCalorie = DateTimeCalorie(dateTime: selectedDate, calorie: Double(totalCalries))
+                dateTimeCalories.append(currentDateTimeCalorie)
+                //                defaults.set(self.dateTimeCalories, forKey: "DateTimeCaloriesArray")
+                
+            }.padding()
             
             
             
@@ -55,7 +97,7 @@ struct IngredientView: View {
                     }
                 }
             }
-
+            
         }
         .onChange(of: networkManager.ingredients) { ingredientsFromAPI in
             if !ingredientsFromAPI.isEmpty {
@@ -73,14 +115,19 @@ struct IngredientView: View {
             if !ingredientsForDisplaying.isEmpty {
                 totalCalries = 0
                 for i in 0..<ingredientsForDisplaying.count {
-                    totalCalries += ingredientsForDisplaying[i].quantity * Int(Float(ingredientsForDisplaying[i].calories ))
+                    totalCalries += Double(ingredientsForDisplaying[i].quantity) * (Double(ingredientsForDisplaying[i].calories ))
                 }
             }
         }
         
-        DailyCalorieGraph(entries: DateTimeCalorie.dataEntries(DateTimeCalorie.allDailyCalorie))
-    }
-    
+        DailyCalorieGraph(entries: DateTimeCalorie.dataEntries(dateTimeCalories))
+    } //: end of Body
+    private let dateFormatter: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .long
+            formatter.timeStyle = .short
+            return formatter
+        }()
 }
 
 struct IngredientView_Previews: PreviewProvider {

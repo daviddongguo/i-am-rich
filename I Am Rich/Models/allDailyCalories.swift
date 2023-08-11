@@ -16,11 +16,11 @@ struct DateTimeCalorie {
     static func days() -> [String] {
         return self.dataEntries(self.allDailyCalorie).map { entry in
             if let formattedDay = dayOfYearToString(Int(entry.x)) {
-//                return formattedDay
-                return "Jun 1"
+                return formattedDay
+//                return "Jun 1"
             } else {
-//                return "Invalid day"
-                return "JUn 1"
+                return "Invalid day"
+//                return "JUn 1"
             }
         }
     }
@@ -49,7 +49,6 @@ struct DateTimeCalorie {
     
     static var allDailyCalorie: [DateTimeCalorie] {
         [
-            
             DateTimeCalorie(dateTime: parseDate("2023-08-3 07:30"), calorie: 1200.0),
             DateTimeCalorie(dateTime: parseDate("2023-08-4 07:30"), calorie: 1200.0),
             DateTimeCalorie(dateTime: parseDate("2023-08-5 07:30"), calorie: 1600.0),
