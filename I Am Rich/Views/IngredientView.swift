@@ -5,7 +5,10 @@
 //  Created by david on 2023-08-08.
 //
 
+import DGCharts
 import SwiftUI
+
+
 
 struct IngredientView: View {
     

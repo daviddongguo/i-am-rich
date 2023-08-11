@@ -22,7 +22,23 @@
 		63D8FB262A828D6700BCD60C /* KeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D8FB252A828D6700BCD60C /* KeyManager.swift */; };
 		63D8FB282A828F5B00BCD60C /* IngredientData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D8FB272A828F5B00BCD60C /* IngredientData.swift */; };
 		63D8FB2A2A8299A100BCD60C /* IngredientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D8FB292A8299A100BCD60C /* IngredientView.swift */; };
+		63D8FB322A86792300BCD60C /* allDailyCalories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D8FB312A86792300BCD60C /* allDailyCalories.swift */; };
+		63D8FB342A867A7100BCD60C /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 63D8FB332A867A7100BCD60C /* DGCharts */; };
+		63D8FB362A86804700BCD60C /* DailyCalorieGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D8FB352A86804700BCD60C /* DailyCalorieGraph.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		63D8FB302A8678CA00BCD60C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		63C875A52A812E110089A5A2 /* I Am Rich.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "I Am Rich.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,6 +57,9 @@
 		63D8FB252A828D6700BCD60C /* KeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyManager.swift; sourceTree = "<group>"; };
 		63D8FB272A828F5B00BCD60C /* IngredientData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientData.swift; sourceTree = "<group>"; };
 		63D8FB292A8299A100BCD60C /* IngredientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientView.swift; sourceTree = "<group>"; };
+		63D8FB2B2A86782900BCD60C /* Charts */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Charts; path = ../../../Charts; sourceTree = "<group>"; };
+		63D8FB312A86792300BCD60C /* allDailyCalories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = allDailyCalories.swift; sourceTree = "<group>"; };
+		63D8FB352A86804700BCD60C /* DailyCalorieGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCalorieGraph.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63D8FB342A867A7100BCD60C /* DGCharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +79,7 @@
 			children = (
 				63C875A72A812E110089A5A2 /* I Am Rich */,
 				63C875A62A812E110089A5A2 /* Products */,
+				63D8FB2C2A8678CA00BCD60C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -73,6 +94,7 @@
 		63C875A72A812E110089A5A2 /* I Am Rich */ = {
 			isa = PBXGroup;
 			children = (
+				63D8FB2B2A86782900BCD60C /* Charts */,
 				63D8FB242A828D4300BCD60C /* Utils */,
 				63D8FB1F2A81B32C00BCD60C /* Views */,
 				63D8FB182A818BE600BCD60C /* Models */,
@@ -102,6 +124,7 @@
 				63D8FB192A818C0E00BCD60C /* NetworkManager.swift */,
 				63D8FB1B2A818DCB00BCD60C /* PostData.swift */,
 				63D8FB272A828F5B00BCD60C /* IngredientData.swift */,
+				63D8FB312A86792300BCD60C /* allDailyCalories.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -112,6 +135,7 @@
 				63D8FB202A81B33C00BCD60C /* DetailView.swift */,
 				63D8FB222A81B78100BCD60C /* WebView.swift */,
 				63D8FB292A8299A100BCD60C /* IngredientView.swift */,
+				63D8FB352A86804700BCD60C /* DailyCalorieGraph.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -124,6 +148,13 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		63D8FB2C2A8678CA00BCD60C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -134,12 +165,16 @@
 				63C875A12A812E110089A5A2 /* Sources */,
 				63C875A22A812E110089A5A2 /* Frameworks */,
 				63C875A32A812E110089A5A2 /* Resources */,
+				63D8FB302A8678CA00BCD60C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "I Am Rich";
+			packageProductDependencies = (
+				63D8FB332A867A7100BCD60C /* DGCharts */,
+			);
 			productName = "I Am Rich";
 			productReference = 63C875A52A812E110089A5A2 /* I Am Rich.app */;
 			productType = "com.apple.product-type.application";
@@ -202,8 +237,10 @@
 				63C875AB2A812E110089A5A2 /* ContentView.swift in Sources */,
 				63D8FB152A81876500BCD60C /* RandomDice.swift in Sources */,
 				63C875BC2A81593B0089A5A2 /* InfoView.swift in Sources */,
+				63D8FB322A86792300BCD60C /* allDailyCalories.swift in Sources */,
 				63D8FB172A81896C00BCD60C /* NewsView.swift in Sources */,
 				63D8FB232A81B78100BCD60C /* WebView.swift in Sources */,
+				63D8FB362A86804700BCD60C /* DailyCalorieGraph.swift in Sources */,
 				63D8FB282A828F5B00BCD60C /* IngredientData.swift in Sources */,
 				63D8FB1C2A818DCB00BCD60C /* PostData.swift in Sources */,
 				63C875A92A812E110089A5A2 /* I_Am_RichApp.swift in Sources */,
@@ -409,6 +446,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		63D8FB332A867A7100BCD60C /* DGCharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DGCharts;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 63C8759D2A812E110089A5A2 /* Project object */;
 }
