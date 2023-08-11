@@ -12,7 +12,6 @@ import SwiftUI
 
 struct IngredientView: View {
     
-    let defaults = UserDefaults.standard
     @State private var dateTimeCalories : [DateTimeCalorie] = [
         DateTimeCalorie(dateTime: DateTimeCalorie.parseDate("2023-08-3 07:30"), calorie: 1200.0),
         DateTimeCalorie(dateTime: DateTimeCalorie.parseDate("2023-08-4 07:30"), calorie: 1200.0),
@@ -78,7 +77,7 @@ struct IngredientView: View {
             Button("Save") {
                 let currentDateTimeCalorie = DateTimeCalorie(dateTime: selectedDate, calorie: Double(totalCalries))
                 dateTimeCalories.append(currentDateTimeCalorie)
-                //                defaults.set(self.dateTimeCalories, forKey: "DateTimeCaloriesArray")
+//                self.defaults.set(self.dateTimeCalories, forKey: "DateTimeCaloriesArray")
                 
             }.padding()
             
