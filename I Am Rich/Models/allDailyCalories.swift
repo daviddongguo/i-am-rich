@@ -13,6 +13,18 @@ struct DateTimeCalorie {
     var dateTime: Date
     var calorie: Double
     
+    static func days() -> [String] {
+        return self.dataEntries(self.allDailyCalorie).map { entry in
+            if let formattedDay = dayOfYearToString(Int(entry.x)) {
+//                return formattedDay
+                return "Jun 1"
+            } else {
+//                return "Invalid day"
+                return "JUn 1"
+            }
+        }
+    }
+    
     static func dataEntries(_ dateTimeCalories: [DateTimeCalorie]) -> [BarChartDataEntry] {
         var aggregatedData: [String: Double] = [:]
         let dateFormatter = DateFormatter()
@@ -30,12 +42,16 @@ struct DateTimeCalorie {
         }
         
         let calendar = Calendar.current
-        return aggregatedData.map { BarChartDataEntry(x: Double(calendar.component(.day, from: dateFormatter.date(from: $0.key)!)), y: $0.value) }
+        return aggregatedData.map { BarChartDataEntry(x: Double(calendar.ordinality(of: .day, in: .year, for: dateFormatter.date(from: $0.key)!) ?? 1), y: $0.value) }
+//        return aggregatedData.map { BarChartDataEntry(x: Double(calendar.component(.day, from: dateFormatter.date(from: $0.key)!)), y: $0.value) }
+//        return aggregatedData.map { BarChartDataEntry(x: $0.key.toTimeInterval(),  y: $0.value) }
     }
     
     static var allDailyCalorie: [DateTimeCalorie] {
         [
             
+            DateTimeCalorie(dateTime: parseDate("2023-08-3 07:30"), calorie: 1200.0),
+            DateTimeCalorie(dateTime: parseDate("2023-08-4 07:30"), calorie: 1200.0),
             DateTimeCalorie(dateTime: parseDate("2023-08-5 07:30"), calorie: 1600.0),
             DateTimeCalorie(dateTime: parseDate("2023-08-6 07:30"), calorie: 2600.0),
             DateTimeCalorie(dateTime: parseDate("2023-08-7 07:30"), calorie: 1600.0),
@@ -58,6 +74,26 @@ struct DateTimeCalorie {
         }
         return Date()
     }
+    
+    static func dayOfYearToString(_ dayOfYear: Int) -> String? {
+        guard dayOfYear >= 1 && dayOfYear <= 366 else {
+            return nil
+        }
+        
+        let dateComponents = DateComponents(year: Calendar.current.component(.year, from: Date()), day: dayOfYear)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM d"
+        if let date = Calendar.current.date(from: dateComponents) {
+            let dayFormatter = NumberFormatter()
+            dayFormatter.numberStyle = .ordinal
+            if let day = dayFormatter.string(from: dayOfYear as NSNumber) {
+                return dateFormatter.string(from: date) + " " + day
+            }
+        }
+        
+        return nil
+    }
+
 }
 
 extension String {

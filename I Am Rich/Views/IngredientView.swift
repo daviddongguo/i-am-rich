@@ -77,6 +77,8 @@ struct IngredientView: View {
                 }
             }
         }
+        
+        DailyCalorieGraph(entries: DateTimeCalorie.dataEntries(DateTimeCalorie.allDailyCalorie))
     }
     
 }
