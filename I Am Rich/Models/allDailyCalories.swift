@@ -7,11 +7,21 @@
 
 import DGCharts
 import Foundation
+import RealmSwift
 
 
-struct DateTimeCalorie {
-    var dateTime: Date
-    var calorie: Double
+class DateTimeCalorie : Object{
+    @Persisted(primaryKey: true) var _id: ObjectId
+    @Persisted var dateTime: Date = Date()
+    @Persisted var calories: Double = 50.0
+    @Persisted var foodText: String? = nil
+    @Persisted var imageUrl: String? = nil
+    
+    convenience init(dateTime: Date, calories: Double) {
+        self.init()
+        self.dateTime = dateTime
+        self.calories = calories
+    }
     
     static func days() -> [String] {
         return self.dataEntries(self.allDailyCalorie).map { entry in
@@ -35,9 +45,9 @@ struct DateTimeCalorie {
             let dateString = dateFormatter.string(from: dateTimeCalorie.dateTime)
             
             if let existingCalorie = aggregatedData[dateString] {
-                aggregatedData[dateString] = existingCalorie + dateTimeCalorie.calorie
+                aggregatedData[dateString] = existingCalorie + dateTimeCalorie.calories
             } else {
-                aggregatedData[dateString] = dateTimeCalorie.calorie
+                aggregatedData[dateString] = dateTimeCalorie.calories
             }
         }
         
@@ -49,19 +59,10 @@ struct DateTimeCalorie {
     
     static var allDailyCalorie: [DateTimeCalorie] {
         [
-            DateTimeCalorie(dateTime: parseDate("2023-08-3 07:30"), calorie: 1200.0),
-            DateTimeCalorie(dateTime: parseDate("2023-08-4 07:30"), calorie: 1200.0),
-            DateTimeCalorie(dateTime: parseDate("2023-08-5 07:30"), calorie: 1600.0),
-            DateTimeCalorie(dateTime: parseDate("2023-08-6 07:30"), calorie: 2600.0),
-            DateTimeCalorie(dateTime: parseDate("2023-08-7 07:30"), calorie: 1600.0),
-            DateTimeCalorie(dateTime: parseDate("2023-08-8 07:30"), calorie: 1600.0),
-            DateTimeCalorie(dateTime: parseDate("2023-08-9 07:30"), calorie: 600.0),
-            DateTimeCalorie(dateTime: parseDate("2023-08-10 07:30"), calorie: 600.0),
-            DateTimeCalorie(dateTime: parseDate("2023-08-10 13:30"), calorie: 600.0),
-            DateTimeCalorie(dateTime: parseDate("2023-08-10 18:30"), calorie: 400.0),
-            DateTimeCalorie(dateTime: parseDate("2023-08-11 07:30"), calorie: 600.0),
-            DateTimeCalorie(dateTime: parseDate("2023-08-11 13:30"), calorie: 600.0),
-            DateTimeCalorie(dateTime: parseDate("2023-08-11 18:30"), calorie: 300.0),
+            DateTimeCalorie(dateTime: parseDate("2023-08-3 07:30"), calories: 1200.0),
+            DateTimeCalorie(dateTime: parseDate("2023-08-4 07:30"), calories: 1200.0),
+            DateTimeCalorie(dateTime: parseDate("2023-08-5 07:30"), calories: 1600.0),
+            DateTimeCalorie(dateTime: parseDate("2023-08-6 07:30"), calories: 2600.0),
         ]
     }
     

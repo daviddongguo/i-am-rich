@@ -7,17 +7,19 @@
 
 import DGCharts
 import SwiftUI
-
+import RealmSwift
 
 
 struct IngredientView: View {
     
+    
+    
     @State private var dateTimeCalories : [DateTimeCalorie] = [
-        DateTimeCalorie(dateTime: DateTimeCalorie.parseDate("2023-08-3 07:30"), calorie: 1200.0),
-        DateTimeCalorie(dateTime: DateTimeCalorie.parseDate("2023-08-4 07:30"), calorie: 1200.0),
-        DateTimeCalorie(dateTime: DateTimeCalorie.parseDate("2023-08-5 07:30"), calorie: 1200.0),
-        DateTimeCalorie(dateTime: DateTimeCalorie.parseDate("2023-08-6 07:30"), calorie: 1200.0),
-        DateTimeCalorie(dateTime: DateTimeCalorie.parseDate("2023-08-7 07:30"), calorie: 1200.0),
+        DateTimeCalorie(dateTime: DateTimeCalorie.parseDate("2023-08-3 07:30"), calories: 1200.0),
+        DateTimeCalorie(dateTime: DateTimeCalorie.parseDate("2023-08-4 07:30"), calories: 1200.0),
+        DateTimeCalorie(dateTime: DateTimeCalorie.parseDate("2023-08-5 07:30"), calories: 1200.0),
+        DateTimeCalorie(dateTime: DateTimeCalorie.parseDate("2023-08-6 07:30"), calories: 1200.0),
+        DateTimeCalorie(dateTime: DateTimeCalorie.parseDate("2023-08-7 07:30"), calories: 1200.0),
     ]
     
     @State private var selectedDate = Date()
@@ -52,7 +54,7 @@ struct IngredientView: View {
             }) //: end of Button
             Text("\(selectedDate, formatter: dateFormatter)")
                 .padding()
-
+            
             Text(totalCalries.formatted()).font(.system(size: 50)).fontWeight(.heavy).foregroundColor(.white).background(.red).padding(.horizontal)
             
             Slider(value: $totalCalries, in: 0...1200, step: 10)
@@ -75,9 +77,18 @@ struct IngredientView: View {
             .padding()
             
             Button("Save") {
-                let currentDateTimeCalorie = DateTimeCalorie(dateTime: selectedDate, calorie: Double(totalCalries))
+                let currentDateTimeCalorie = DateTimeCalorie(dateTime: selectedDate, calories: Double(totalCalries))
                 dateTimeCalories.append(currentDateTimeCalorie)
-//                self.defaults.set(self.dateTimeCalories, forKey: "DateTimeCaloriesArray")
+                // save on database
+                do {
+                    let realm = try Realm()
+                    try realm.write {
+                        realm.add(currentDateTimeCalorie)
+                    }
+                    print(Realm.Configuration.defaultConfiguration.fileURL)
+                } catch {
+                    print("Error initialising new real, \(error)")
+                }
                 
             }.padding()
             
@@ -120,13 +131,28 @@ struct IngredientView: View {
         }
         
         DailyCalorieGraph(entries: DateTimeCalorie.dataEntries(dateTimeCalories))
+            .onAppear {
+                do {
+                    let realm = try Realm()
+                    let results = realm.objects(DateTimeCalorie.self)
+                    
+                    dateTimeCalories.removeAll()
+                    for result in results {
+                        dateTimeCalories.append(result)
+                    }
+                    
+                } catch {
+                    print("\(error)")
+                }
+            }
+        
     } //: end of Body
     private let dateFormatter: DateFormatter = {
-            let formatter = DateFormatter()
-            formatter.dateStyle = .long
-            formatter.timeStyle = .short
-            return formatter
-        }()
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.timeStyle = .short
+        return formatter
+    }()
 }
 
 struct IngredientView_Previews: PreviewProvider {

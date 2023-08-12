@@ -25,6 +25,8 @@
 		63D8FB322A86792300BCD60C /* allDailyCalories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D8FB312A86792300BCD60C /* allDailyCalories.swift */; };
 		63D8FB342A867A7100BCD60C /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 63D8FB332A867A7100BCD60C /* DGCharts */; };
 		63D8FB362A86804700BCD60C /* DailyCalorieGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D8FB352A86804700BCD60C /* DailyCalorieGraph.swift */; };
+		63D8FB392A86D8BD00BCD60C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 63D8FB382A86D8BD00BCD60C /* RealmSwift */; };
+		63D8FB3B2A87244D00BCD60C /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D8FB3A2A87244D00BCD60C /* Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -60,6 +62,7 @@
 		63D8FB2B2A86782900BCD60C /* Charts */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Charts; path = ../../../Charts; sourceTree = "<group>"; };
 		63D8FB312A86792300BCD60C /* allDailyCalories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = allDailyCalories.swift; sourceTree = "<group>"; };
 		63D8FB352A86804700BCD60C /* DailyCalorieGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCalorieGraph.swift; sourceTree = "<group>"; };
+		63D8FB3A2A87244D00BCD60C /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63D8FB392A86D8BD00BCD60C /* RealmSwift in Frameworks */,
 				63D8FB342A867A7100BCD60C /* DGCharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -125,6 +129,7 @@
 				63D8FB1B2A818DCB00BCD60C /* PostData.swift */,
 				63D8FB272A828F5B00BCD60C /* IngredientData.swift */,
 				63D8FB312A86792300BCD60C /* allDailyCalories.swift */,
+				63D8FB3A2A87244D00BCD60C /* Data.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -174,6 +179,7 @@
 			name = "I Am Rich";
 			packageProductDependencies = (
 				63D8FB332A867A7100BCD60C /* DGCharts */,
+				63D8FB382A86D8BD00BCD60C /* RealmSwift */,
 			);
 			productName = "I Am Rich";
 			productReference = 63C875A52A812E110089A5A2 /* I Am Rich.app */;
@@ -203,6 +209,9 @@
 				Base,
 			);
 			mainGroup = 63C8759C2A812E110089A5A2;
+			packageReferences = (
+				63D8FB372A86D8BD00BCD60C /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = 63C875A62A812E110089A5A2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -231,6 +240,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63D8FB1A2A818C0E00BCD60C /* NetworkManager.swift in Sources */,
+				63D8FB3B2A87244D00BCD60C /* Data.swift in Sources */,
 				63D8FB262A828D6700BCD60C /* KeyManager.swift in Sources */,
 				63D8FB212A81B33C00BCD60C /* DetailView.swift in Sources */,
 				63D8FB2A2A8299A100BCD60C /* IngredientView.swift in Sources */,
@@ -447,10 +457,26 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		63D8FB372A86D8BD00BCD60C /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		63D8FB332A867A7100BCD60C /* DGCharts */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DGCharts;
+		};
+		63D8FB382A86D8BD00BCD60C /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 63D8FB372A86D8BD00BCD60C /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
